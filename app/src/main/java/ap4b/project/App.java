@@ -29,4 +29,8 @@ public class App extends Application {
     public void setCreditsScene() {
         this.stage.setScene(new CreditsScene(this, this.width, this.height));
     }
+
+    public void setStartScene() {
+        this.stage.setScene(new StartScene(this, this.width, this.height));
+    }
 }

@@ -69,7 +69,7 @@ public class WelcomeScene extends Scene {
         this.rootPane.startButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Start");
+                parentApp.setStartScene();
             }
         });
 
