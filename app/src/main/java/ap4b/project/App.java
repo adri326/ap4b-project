@@ -33,4 +33,8 @@ public class App extends Application {
     public void setStartScene() {
         this.stage.setScene(new StartScene(this, this.width, this.height));
     }
+
+    public void setMainScene() {
+        this.stage.setScene(new MainScene(this, this.width, this.height));
+    }
 }

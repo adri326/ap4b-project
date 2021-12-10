@@ -33,3 +33,7 @@ build
 .project
 .settings
 .classpath
+
+*.png~
+*.kra~
+*-autosave.kra
