@@ -8,29 +8,35 @@ import javafx.scene.control.*;
 import javafx.geometry.*;
 
 public class StartScene extends Scene {
-    public static class StartPane extends GridPane {
-        // I'd have used something else but I can't figure out how to put together the TextFormatter class
-        // and the documentation has no example. This isn't a TODO per se, but if anyone wants
-        // to paste in their code for a numerical field they can and I'll happily merge it - Shad
-        private TextField widthField = new TextField("100");
-        private TextField heightField = new TextField("100");
+    public static class StartPane extends VBox {
+        private IntegerField widthField = new IntegerField(10, 100, 50);
+        private IntegerField heightField = new IntegerField(10, 100, 50);
+        private IntegerField difficultyField = new IntegerField(1, 10, 5);
         private Button continueButton = new Button("Create world!");
         private Button backButton = new Button("Back");
 
         StartPane() {
-            super();
+            super(10);
             this.setAlignment(Pos.CENTER);
 
             HBox widthBox = new HBox(10);
-            widthBox.getChildren().addAll(new Text("Width:"), this.widthField);
-            this.add(widthBox, 0, 0);
+            widthBox.setAlignment(Pos.CENTER);
+            widthBox.getChildren().addAll(new Label("Width:"), this.widthField);
 
             HBox heightBox = new HBox(10);
-            heightBox.getChildren().addAll(new Text("Height:"), this.heightField);
-            this.add(heightBox, 0, 1);
+            heightBox.setAlignment(Pos.CENTER);
+            heightBox.getChildren().addAll(new Label("Height:"), this.heightField);
 
-            this.add(this.continueButton, 0, 2);
-            this.add(this.backButton, 0, 3);
+            HBox difficultyBox = new HBox(10);
+            difficultyBox.setAlignment(Pos.CENTER);
+            difficultyBox.getChildren().addAll(new Label("Difficulty [1-10]:"), this.difficultyField);
+
+            HBox buttonsBox = new HBox(20);
+            buttonsBox.setAlignment(Pos.CENTER);
+            buttonsBox.setPadding(new Insets(10, 10, 10, 10));
+            buttonsBox.getChildren().addAll(this.backButton, this.continueButton);
+
+            this.getChildren().addAll(widthBox, heightBox, difficultyBox, buttonsBox);
         }
     }
 
@@ -42,11 +48,21 @@ public class StartScene extends Scene {
 
         this.parentApp = parentApp;
         this.rootPane = (StartPane)this.getRoot();
+        StartPane rootPane = this.rootPane;
 
         this.rootPane.backButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 parentApp.setWelcomeScene();
+            }
+        });
+
+        this.rootPane.continueButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println(rootPane.widthField.getValue());
+                System.out.println(rootPane.heightField.getValue());
+                System.out.println(rootPane.difficultyField.getValue());
             }
         });
     }
