@@ -7,7 +7,7 @@ The root directory is quite cluttered, sorry about that.
     - [Grabbing the source code](#grabbing-the-source-code)
     - [Compiling the source code](#compiling-the-source-code)
     - [Working with Eclipse](#working-with-eclipse)
-    - [Working with Eclipse - alternate version](#working-with-eclipse-alternate-version)
+    - [Working with Eclipse - alternate version](#working-with-eclipse---alternate-version)
 - [Editing the UML files](#editing-the-uml-files)
 
 ## Installing and running
