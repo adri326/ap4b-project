@@ -34,6 +34,18 @@ build
 .settings
 .classpath
 
+# Krita-related
+
 *.png~
 *.kra~
 *-autosave.kra
+
+# Latex-related
+
+*.list
+*.out
+*.log
+*.aux
+*.blg
+*.bbl
+*.toc
