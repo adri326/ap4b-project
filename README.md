@@ -102,10 +102,13 @@ Github unfortunately does not have a "download file" button, so you will need to
 
 <!-- Come on, github, how hard is it for you team to implement this? -->
 
-- [`uml de sequence.drawio`](https://downgit.github.io/#/home?url=https://github.com/adri326/ap4b-project/blob/main/uml%20de%20sequence.drawio)
+- [`uml-sequence-1.drawio`](https://downgit.github.io/#/home?url=https://github.com/adri326/ap4b-project/blob/main/uml-sequence-1.drawio)
+- [`uml-sequence-2.drawio`](https://downgit.github.io/#/home?url=https://github.com/adri326/ap4b-project/blob/main/uml-sequence-2.drawio)
+- [`uml-sequence-3.drawio`](https://downgit.github.io/#/home?url=https://github.com/adri326/ap4b-project/blob/main/uml-sequence-3.drawio)
+- [`uml-sequence-4.drawio`](https://downgit.github.io/#/home?url=https://github.com/adri326/ap4b-project/blob/main/uml-sequence-4.drawio)
 - [`uml-classes.drawio`](https://downgit.github.io/#/home?url=https://github.com/adri326/ap4b-project/blob/main/uml-classes.drawio)
 - [`uml-communication.drawio`](https://downgit.github.io/#/home?url=https://github.com/adri326/ap4b-project/blob/main/uml-communication.drawio)
 - [`uml-usecases.drawio`](https://downgit.github.io/#/home?url=https://github.com/adri326/ap4b-project/blob/main/uml-usecases.drawio)
-- [`Description textuelle (1).odt`](https://downgit.github.io/#/home?url=https://github.com/adri326/ap4b-project/blob/main/Description%20textuelle%20(1).odt)
+- [`Description textuelle.odt`](https://downgit.github.io/#/home?url=https://github.com/adri326/ap4b-project/blob/main/Description%20textuelle.odt)
 
 For `.drawio` files, you can download [draw.io desktop](https://github.com/jgraph/drawio-desktop/releases) and open it with it, or simply go to [draw.io](https://app.diagrams.net/), choose to save diagrams to the `Device` and then open the file that you downloaded.
