@@ -20,24 +20,24 @@ public class MainScene extends Scene {
     private GraphicsContext ctx;
     private double width;
     private double height;
+
     private double zoomFactor = 4.0;
     private final static int tileSize = 16;
 
-    private HashMap<String, Image> images = new HashMap();
-    private HashSet<String> is_ctm = new HashSet();
-
+    // TODO: remove
     private String tmpMap[][] = new String[10][10];
 
+    /**
+        Draws a single tile at (x, y).
+        If the tile has a ctm texture, draws the middlemost quadrant of the texture.
+    **/
     private void drawTile(int x, int y, String tile) {
-        Image image = this.images.get(tile);
+        Image image = Textures.getImage(tile);
 
-        if (is_ctm.contains(tile)) {
+        if (Textures.isCtm(tile)) {
             ctx.drawImage(
                 image,
-                tileSize,
-                tileSize,
-                tileSize,
-                tileSize,
+                tileSize, tileSize, tileSize, tileSize,
                 x * tileSize * zoomFactor,
                 y * tileSize * zoomFactor,
                 tileSize * zoomFactor,
@@ -55,11 +55,15 @@ public class MainScene extends Scene {
     }
 
     // This is awfully inefficient, but we weren't given enough time
+    /**
+        Draws the connected part of a texture at (x, y), iff that texture is a ctm texture and
+        the adjacent tiles aren't already occupied by it.
+    **/
     private void drawTileCTM(int x, int y, String[][] map) {
         int width = map.length;
         int height = map[0].length;
 
-        if (!is_ctm.contains(map[x][y])) return;
+        if (!Textures.isCtm(map[x][y])) return;
 
         for (int dx = -1; dx <= 1; dx++) {
             for (int dy = -1; dy <= 1; dy++) {
@@ -68,7 +72,7 @@ public class MainScene extends Scene {
                 if (map[x + dx][y + dy] == map[x][y]) continue;
 
                 ctx.drawImage(
-                    this.images.get(map[x][y]),
+                    Textures.getImage(map[x][y]),
                     (dx + 1) * tileSize,
                     (dy + 1) * tileSize,
                     tileSize,
@@ -99,6 +103,11 @@ public class MainScene extends Scene {
         }
     }
 
+    // No way to avoid the horrible blinking
+    /**
+        Resizes the inner canvas and updates width and height.
+        Called whenever the window is rescaled.
+    **/
     private void resize(double width, double height) {
         this.width = width;
         this.height = height;
@@ -112,10 +121,6 @@ public class MainScene extends Scene {
     MainScene(App parentApp, double width, double height) {
         super(new StackPane(), width, height);
         this.rootPane = (StackPane)this.getRoot();
-
-        this.images.put("grass", new Image("/grass.png"));
-        this.images.put("forest", new Image("/forest.png"));
-        this.is_ctm.add("forest");
 
         this.parentApp = parentApp;
         this.width = width;
