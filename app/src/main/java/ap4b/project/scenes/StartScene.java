@@ -63,6 +63,11 @@ public class StartScene extends Scene {
                 System.out.println(rootPane.widthField.getValue());
                 System.out.println(rootPane.heightField.getValue());
                 System.out.println(rootPane.difficultyField.getValue());
+                parentApp.gameState = new GameState(
+                    rootPane.widthField.getValue(),
+                    rootPane.heightField.getValue(),
+                    rootPane.difficultyField.getValue()
+                );
                 parentApp.setMainScene();
             }
         });
