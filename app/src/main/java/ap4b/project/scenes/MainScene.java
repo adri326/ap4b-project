@@ -69,7 +69,13 @@ public class MainScene extends Scene {
             for (int dy = -1; dy <= 1; dy++) {
                 if (dx == 0 && dy == 0) continue;
                 if (x + dx < 0 | x + dx >= width || y + dy < 0 || y + dy >= height) continue;
-                if (map[x + dx][y + dy] == map[x][y]) continue;
+                if (!Textures.shouldDrawCtm(map[x][y], map[x + dx][y + dy])) continue;
+                if (dx != 0 && dy != 0) {
+                    if (
+                        !Textures.shouldDrawCtm(map[x][y], map[x + dx][y])
+                        || !Textures.shouldDrawCtm(map[x][y], map[x][y + dy])
+                    ) continue;
+                }
 
                 ctx.drawImage(
                     Textures.getImage(map[x][y]),
@@ -96,9 +102,13 @@ public class MainScene extends Scene {
             }
         }
 
-        for (int y = 0; y < 10; y++) {
-            for (int x = 0; x < 10; x++) {
-                drawTileCTM(x, y, this.tmpMap);
+        for (int priority = 1; priority < Textures.MAX_PRIORITY; priority++) {
+            for (int y = 0; y < 10; y++) {
+                for (int x = 0; x < 10; x++) {
+                    if (Textures.getInstance().ctmPriority.get(this.tmpMap[x][y]) == priority) {
+                        drawTileCTM(x, y, this.tmpMap);
+                    }
+                }
             }
         }
     }
@@ -142,8 +152,32 @@ public class MainScene extends Scene {
 
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 10; x++) {
-                this.tmpMap[x][y] = Math.random() < 0.5 ? "grass" : "forest";
+                this.tmpMap[x][y] = Math.random() < 0.9 ? "grass" : "hills";
             }
+        }
+        for (int n = 0; n < 5; n++) {
+            this.tmpMap[(int)Math.floor(Math.random() * 10)][(int)Math.floor(Math.random() * 10)] = "forest";
+        }
+        for (int n = 0; n < 5; n++) {
+            this.tmpMap[(int)Math.floor(Math.random() * 10)][(int)Math.floor(Math.random() * 10)] = "coal";
+        }
+        for (int n = 0; n < 5; n++) {
+            this.tmpMap[(int)Math.floor(Math.random() * 10)][(int)Math.floor(Math.random() * 10)] = "uranium";
+        }
+        for (int n = 0; n < 5; n++) {
+            this.tmpMap[(int)Math.floor(Math.random() * 10)][(int)Math.floor(Math.random() * 10)] = "thorium";
+        }
+        int x = 4;
+        int y = 0;
+        while (y < 10) {
+            this.tmpMap[x][y] = "water";
+            if (Math.random() < 0.6) {
+                y += 1;
+            } else {
+                x += Math.random() < 0.5 ? 1 : -1;
+            }
+            if (x < 0) x = 0;
+            if (x >= 10) x = 9;
         }
         this.draw();
     }

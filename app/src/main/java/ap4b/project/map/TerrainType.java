@@ -3,12 +3,12 @@ package ap4b.project;
 public enum TerrainType {
     // TODO: individual textures
     PLAINS("grass"),
-    RIVER("grass"),
-    HILLS("grass"),
+    RIVER("water"),
+    HILLS("hills"),
     FOREST("forest"),
-    COAL_FIELD("grass"),
-    URANIUM_FIELD("grass"),
-    THORIUM_FIELD("grass");
+    COAL_FIELD("coal"),
+    URANIUM_FIELD("uranium"),
+    THORIUM_FIELD("thorium");
 
     private String texture;
 
