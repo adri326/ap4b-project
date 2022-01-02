@@ -23,6 +23,6 @@ public class Tile {
     }
 
     public String getTexture() {
-        return this.terrainType.getTexture();
+        return "";
     }
 }

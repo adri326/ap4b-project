@@ -9,6 +9,8 @@ public class App extends Application {
     private double height = 600;
     private Stage stage = null;
 
+    public GameState gameState = null; // NPE goes brr
+
     public static void main(String[] args) {
         launch(args);
     }
