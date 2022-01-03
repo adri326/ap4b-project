@@ -1,4 +1,4 @@
-package weather;
+package ap4b.project;
 import groovy.console.ui.AstBrowser;
 
 import javax.swing.*;
@@ -15,6 +15,12 @@ public class Weather {
     private float facteurrainfall = 0.0f;
     private int rainfall = 0;
     private boolean isday = true;
+    
+    public Weather(){
+        this.timeOfDay = 0;
+        this.facteurtime = 0.0 ;
+        this.facteurrainfall = 0.0;
+    }
     public Weather(int timeOfDay, float facteurtime,float facteurrainfall){
         this.timeOfDay = timeOfDay;
         this.facteurtime = facteurtime ;
