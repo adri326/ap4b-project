@@ -1,4 +1,4 @@
-package image;
+package ap4b.project;
 
 import groovy.console.ui.AstBrowser;
 
@@ -16,6 +16,14 @@ public class Bank {
     private boolean hasDifficulty = false;
     private int loanmoney = 0;
     private int credit = 0;
+    
+    public Bank(){
+        this.money = 0;
+        this.credit = 0;
+        this.loanmoney = this.money;
+        this.loan = false;
+    }
+ 
     public Bank(int money,  int credit) {
         this.money = money;
         this.credit = credit;
