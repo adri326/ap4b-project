@@ -1,6 +1,6 @@
 package ap4b.project;
 
-import groovy.console.ui.AstBrowser;
+// import groovy.console.ui.AstBrowser;
 
 /*
 Mon idée est la suivante :
@@ -16,14 +16,14 @@ public class Bank {
     private boolean hasDifficulty = false;
     private int loanmoney = 0;
     private int credit = 0;
-    
+
     public Bank(){
         this.money = 0;
         this.credit = 0;
         this.loanmoney = this.money;
         this.loan = false;
     }
- 
+
     public Bank(int money,  int credit) {
         this.money = money;
         this.credit = credit;
@@ -33,25 +33,24 @@ public class Bank {
         System.out.println("Situation initiale, Vous avez de l'argent "+this.money+"euros");
         System.out.println("Votre valeur de crédit initiale est de "+this.credit+"euros");
         System.out.println("Vous avez de prêt "+this.loanmoney+"euros");
-        }
+    }
 
-    public  void updatecredit(int repayamountloan){
+    public void updatecredit(int repayamountloan){
         this.credit += repayamountloan;
         System.out.println("Votre valeur de crédit maintenant est de "+this.credit+"eoros");
     }
-    public int updateMoney(int amount) {
 
+    public int updateMoney(int amount) {
         if(amount < 0){
             throw new IllegalArgumentException();
-        }
-        else {
+        } else {
             this.money += amount;
             System.out.println("Vous avez de l'argent "+this.money+"euros");
             return this.money;
         }
     }
-    public void systemeloan(int amount){
 
+    public void systemeloan(int amount){
         if (hasDifficulty) {
             if (verifierCredit(amount)) {
                 updateLoan();
@@ -60,15 +59,14 @@ public class Bank {
                 System.out.println("Succès des prêts");
                 System.out.println("Vous avez de l'argent "+this.money+"euros");
                 System.out.println("Vous avez de Nous avons des prêts "+this.loanmoney+"euros");
-            }
-            else {
+            } else {
                 System.out.println("Désolé, votre cote de crédit actuelle n'est pas suffisante pour vous permettre d'emprunter ce prêt.");
             }
-        }
-        else {
+        } else {
             System.out.println("Vous êtes actuellement dans une bonne situation financière et n'avez pas besoin d'un prêt.");
         }
     }
+
     public boolean verifierCredit(int amount){
         if(amount <= this.credit*10)
             return true;
@@ -76,11 +74,12 @@ public class Bank {
             return false;
         }
     }
+
     public void repayLoanMoney(int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException();
         } else {
-            if(hasLoan()) {
+            if (hasLoan()) {
                 if (amount <= loanmoney) {
                     this.money -= amount;
                     updatecredit(amount);
@@ -93,8 +92,7 @@ public class Bank {
                     repayLoan();
                     System.out.println("Vous avez de prêt "+this.loanmoney+"euros");
                 }
-            }
-            else {
+            } else {
                 System.out.println("Vous n'avez actuellement aucun prêt à rembourser");
             }
         }

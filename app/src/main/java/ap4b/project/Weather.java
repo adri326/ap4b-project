@@ -1,5 +1,5 @@
 package ap4b.project;
-import groovy.console.ui.AstBrowser;
+// import groovy.console.ui.AstBrowser;
 
 import javax.swing.*;
 import java.util.concurrent.TimeUnit;
@@ -15,13 +15,14 @@ public class Weather {
     private float facteurrainfall = 0.0f;
     private int rainfall = 0;
     private boolean isday = true;
-    
+
     public Weather(){
         this.timeOfDay = 0;
-        this.facteurtime = 0.0 ;
-        this.facteurrainfall = 0.0;
+        this.facteurtime = 0.0f;
+        this.facteurrainfall = 0.0f;
     }
-    public Weather(int timeOfDay, float facteurtime,float facteurrainfall){
+
+    public Weather(int timeOfDay, float facteurtime, float facteurrainfall){
         this.timeOfDay = timeOfDay;
         this.facteurtime = facteurtime ;
         this.facteurrainfall = facteurrainfall;
@@ -29,6 +30,7 @@ public class Weather {
         System.out.println("Et le facteur qui influencent le temps de la pluie est "+this.facteurtime);
         System.out.println("Le facteur qui influence les précipitations est "+this.facteurrainfall);
     }
+
     public int getSunFactor() {
         // TODO
         this.timeOfDay -= this.rainy;
@@ -49,9 +51,11 @@ public class Weather {
             return this.rainfall;
         }
         else {
+            // Hold on, what?! - Shad
             throw new IllegalStateException();
         }
     }
+
     public void updateDay(){
         try {
             if (isday) {
@@ -74,7 +78,7 @@ public class Weather {
         updateDay();
         Random rd = new Random();
         israiny = rd.nextBoolean();
-        if(israiny) {
+        if (israiny) {
             this.rainy += (int) (Math.random() * facteurtime);
             getIrrigationFactor();
             System.out.println("Le temps de pluie aujourd'hui est "+this.rainy+"heures");
