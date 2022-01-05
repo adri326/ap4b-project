@@ -35,6 +35,13 @@ public class Textures {
         this.ctmPriority.put("thorium", 1);
         this.ctmPriority.put("water", 2);
         this.ctmPriority.put("forest", 3);
+
+
+        this.images.put("hospital", new Image("/hospital.png"));
+        this.images.put("restaurant", new Image("/restaurant.png"));
+        this.images.put("school", new Image("/school.png"));
+        this.images.put("simplehousing", new Image("/simplehousing.png"));
+        this.images.put("townhall", new Image("/townhall.png"));
     }
 
     public static Textures getInstance() {

@@ -50,6 +50,11 @@ public class Map {
             if (x < 0) x = 0;
             if (x >= this.width) x = this.width - 1;
         }
+
+        this.tiles[3][3] = new Hospital(this.tiles[3][3]);
+        this.tiles[4][3] = new Restaurant(this.tiles[4][3]);
+        this.tiles[3][4] = new SimpleHousing(this.tiles[3][4]);
+        this.tiles[3][5] = new School(this.tiles[3][5]);
     }
 
     private boolean inBounds(int x, int y) {
