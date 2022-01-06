@@ -30,7 +30,7 @@ public class Weather {
         this.minIrrigation = minIrrigation;
         this.maxIrrigation = maxIrrigation;
 
-        System.out.println("Initialement, la durée totale de la journée avec le soleil est fixée à " + this.hoursPerDay + "heures");
+        System.out.println("Initialement, la durée totale de la journée avec le soleil est fixée à " + this.hoursPerDay + " heures");
         System.out.println("Et le facteur qui influencent le temps de la pluie est " + this.rainFactor);
         System.out.println("Le facteur qui influence les précipitations est entre " + this.minIrrigation + " et " + this.maxIrrigation);
     }
@@ -44,9 +44,9 @@ public class Weather {
         float res = this.hoursPerDay - this.rainyHours;
 
         if(this.rainyHours != 0) {
-            System.out.println("En raison de la pluie, les heures claires de la journée deviennent maintenant " + getSunTime() + "heures");
+            System.out.println("En raison de la pluie, les heures claires de la journée deviennent maintenant " + getSunTime() + " heures");
         } else {
-            System.out.println("Les heures de lumière de la journée sont " + getSunTime() + "heures");
+            System.out.println("Les heures de lumière de la journée sont " + res + " heures");
         }
 
         if (res < 0.0f) res = 0.0f;
@@ -55,18 +55,18 @@ public class Weather {
     }
 
     public float getIrrigationFactor() {
-        int res = (int)(map(sigmoid(this.rainyHours), 0.5f, 1.0f, this.minIrrigation, this.maxIrrigation));
-        System.out.println("Les précipitations d'aujourd'hui ont été de " + res + "mm");
+        float res = map(sigmoid(this.rainyHours / 2.0f), 0.5f, 1.0f, this.minIrrigation, this.maxIrrigation);
+        System.out.println("Les précipitations d'aujourd'hui ont été de " + res + "mm (∈ [" + this.minIrrigation + "; " + this.maxIrrigation + "])");
         return res;
     }
 
     public void updateWeather() {
         // this.hoursPerDay = dt;
-        // System.out.println("Après ce changement, les heures de lumière du jour sont "+this.hoursPerDay+"heures");
+        // System.out.println("Après ce changement, les heures de lumière du jour sont " + this.hoursPerDay + " heures");
         Random rd = new Random();
         if (rd.nextBoolean()) {
             this.rainyHours = rd.nextFloat() * rainFactor;
-            System.out.println("Le temps de pluie aujourd'hui est " + this.rainyHours + "heures");
+            System.out.println("Le temps de pluie aujourd'hui est " + this.rainyHours + " heures");
         } else {
             this.rainyHours = 0;
         }
@@ -89,5 +89,15 @@ public class Weather {
 
     private float map(float x, float to_min, float to_max) {
         return x * (to_max - to_min) + to_min;
+    }
+
+    public String toString() {
+        StringBuilder res = new StringBuilder(this.rainyHours > 0.0f ? "Rainy" : "Sunny");
+        res.append(" (");
+        res.append(this.getSunFactor());
+        res.append("h of sun, irrigation: ");
+        res.append(this.getIrrigationFactor() * 100.0f);
+        res.append("%)");
+        return res.toString();
     }
 }
