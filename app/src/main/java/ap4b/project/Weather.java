@@ -1,5 +1,4 @@
 package ap4b.project;
-// import groovy.console.ui.AstBrowser;
 
 import javax.swing.*;
 import java.util.concurrent.TimeUnit;
@@ -8,83 +7,68 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 
 public class Weather {
-    private int rainy = 0;
-    private int timeOfDay = 0;
-    private boolean israiny = false;
-    private float  facteurtime = 0.0f;
-    private float facteurrainfall = 0.0f;
-    private int rainfall = 0;
-    private boolean isday = true;
+    /// The number of hours for which it was raining
+    private float rainyHours = 0;
+    /// The factor used for the number of hours for which it was raining in a day
+    private float rainFactor = 8.0f;
 
-    public Weather(){
-        this.timeOfDay = 0;
-        this.facteurtime = 0.0f;
-        this.facteurrainfall = 0.0f;
+    /// The number of sunny hours in a day
+    private final float hoursPerDay;
+
+    /// The maximum value for irrigation
+    private float minIrrigation = 0.5f;
+    /// The minimum value for irrigation
+    private float maxIrrigation = 1.0f;
+
+    public Weather() {
+        this.hoursPerDay = 12;
     }
 
-    public Weather(int timeOfDay, float facteurtime, float facteurrainfall){
-        this.timeOfDay = timeOfDay;
-        this.facteurtime = facteurtime ;
-        this.facteurrainfall = facteurrainfall;
-        System.out.println("Initialement, la durée totale de la journée avec le soleil est fixée à "+this.timeOfDay+"heures");
-        System.out.println("Et le facteur qui influencent le temps de la pluie est "+this.facteurtime);
-        System.out.println("Le facteur qui influence les précipitations est "+this.facteurrainfall);
+    public Weather(float hoursPerDay, float rainFactor, float minIrrigation, float maxIrrigation) {
+        this.hoursPerDay = hoursPerDay;
+        this.rainFactor = rainFactor;
+        this.minIrrigation = minIrrigation;
+        this.maxIrrigation = maxIrrigation;
+
+        System.out.println("Initialement, la durée totale de la journée avec le soleil est fixée à " + this.hoursPerDay + "heures");
+        System.out.println("Et le facteur qui influencent le temps de la pluie est " + this.rainFactor);
+        System.out.println("Le facteur qui influence les précipitations est entre " + this.minIrrigation + " et " + this.maxIrrigation);
     }
 
-    public int getSunFactor() {
-        // TODO
-        this.timeOfDay -= this.rainy;
-        if(this.rainy != 0) {
-            System.out.println("En raison de la pluie, les heures claires de la journée deviennent maintenant " + this.timeOfDay + "heures");
-        }
-        else {
-            System.out.println("Les heures de lumière de la journée sont "+this.timeOfDay+"heures");
-        }
-        return (int)Math.cos(this.timeOfDay);
+    // Leaving this here in case we need a different function for getSunFactor()
+    private float getSunTime() {
+        return 2.0f * (float)Math.acos(0.3f / map(sigmoid(this.rainyHours), 0.5f, 1.0f, 1.0f, 0.5f));
     }
 
-    public int getIrrigationFactor() {
-        // TODO: σ(rainy) ?
-        if (israiny) {
-            this.rainfall = (int)(this.rainy*this.facteurrainfall);
-            System.out.println("Les précipitations d'aujourd'hui ont été de "+this.rainfall+"mm");
-            return this.rainfall;
+    public float getSunFactor() {
+        float res = this.hoursPerDay - this.rainyHours;
+
+        if(this.rainyHours != 0) {
+            System.out.println("En raison de la pluie, les heures claires de la journée deviennent maintenant " + getSunTime() + "heures");
+        } else {
+            System.out.println("Les heures de lumière de la journée sont " + getSunTime() + "heures");
         }
-        else {
-            // Hold on, what?! - Shad
-            throw new IllegalStateException();
-        }
+
+        if (res < 0.0f) res = 0.0f;
+
+        return res;
     }
 
-    public void updateDay(){
-        try {
-            if (isday) {
-                System.out.println("C'est le jour");
-                TimeUnit.SECONDS.sleep(4);
-                this.isday= false;
-                System.out.println("C'est la nuit");
-                TimeUnit.SECONDS.sleep(4);
-                this.isday = true;
-            }
-        }catch(Exception e) {
-            System.out.println(e);
-        }
+    public float getIrrigationFactor() {
+        int res = (int)(map(sigmoid(this.rainyHours), 0.5f, 1.0f, this.minIrrigation, this.maxIrrigation));
+        System.out.println("Les précipitations d'aujourd'hui ont été de " + res + "mm");
+        return res;
     }
 
-
-    public void updateWeather(int dt) {
-        this.timeOfDay = dt;
-        System.out.println("Après ce changement, les heures de lumière du jour sont "+this.timeOfDay+"heures");
-        updateDay();
+    public void updateWeather() {
+        // this.hoursPerDay = dt;
+        // System.out.println("Après ce changement, les heures de lumière du jour sont "+this.hoursPerDay+"heures");
         Random rd = new Random();
-        israiny = rd.nextBoolean();
-        if (israiny) {
-            this.rainy += (int) (Math.random() * facteurtime);
-            getIrrigationFactor();
-            System.out.println("Le temps de pluie aujourd'hui est "+this.rainy+"heures");
-        }
-        else {
-            this.rainy = 0;
+        if (rd.nextBoolean()) {
+            this.rainyHours = rd.nextFloat() * rainFactor;
+            System.out.println("Le temps de pluie aujourd'hui est " + this.rainyHours + "heures");
+        } else {
+            this.rainyHours = 0;
         }
     }
     /*
@@ -93,4 +77,17 @@ public class Weather {
         weather.updateWeather(8);
 
     }*/
+
+    private float sigmoid(float x) {
+        // tan¯¹(x*π/2)/π+.5
+        return (float)Math.atan(x * Math.PI / 2.0f) / (float)Math.PI + 0.5f;
+    }
+
+    private float map(float x, float from_min, float from_max, float to_min, float to_max) {
+        return map((x - from_min) / (from_max - from_min), to_min, to_max);
+    }
+
+    private float map(float x, float to_min, float to_max) {
+        return x * (to_max - to_min) + to_min;
+    }
 }
