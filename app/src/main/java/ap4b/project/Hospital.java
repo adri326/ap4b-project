@@ -1,9 +1,9 @@
 package ap4b.project;
 
-public class hopital extends habitation
+public class Hospital extends Habitation
 {
     
-    public hopital()
+    public Hospital()
     {
         this.consommationUnity=50;
         this.taux_satisfaction=5;

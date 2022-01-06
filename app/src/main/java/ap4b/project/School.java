@@ -1,6 +1,6 @@
 package ap4b.project;
 
-public class School extends habitation 
+public class School extends Habitation 
 {
     public School()
     {

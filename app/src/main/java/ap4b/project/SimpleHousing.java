@@ -1,6 +1,6 @@
 package ap4b.project;
 
-public class SimpleHousing extends habitation
+public class SimpleHousing extends Habitation
 {
     public SimpleHousing()
     {

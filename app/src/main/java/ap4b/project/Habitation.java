@@ -1,6 +1,6 @@
 package ap4b.project;
 
-public class habitation extends Tile
+public class Habitation extends Tile
 {
     public int population;
     public int consommationUnity;
@@ -9,7 +9,7 @@ public class habitation extends Tile
     public int consomationSpeed;
     public int taux_satisfaction;
     
-    public habitation()
+    public Habitation()
     {
         population=1;
         nb_aliment=0;
@@ -40,7 +40,7 @@ public class habitation extends Tile
         
     }  
     
-    public void UpdateGeneration(Bank bank) // Usine qui alimente l'habitation
+    public void UpdateGeneration(Bank bank) // Usine qui alimente l'Habitation
     {
         while(true)
         {

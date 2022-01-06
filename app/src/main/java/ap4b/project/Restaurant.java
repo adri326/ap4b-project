@@ -1,6 +1,6 @@
 package ap4b.project;
 
-public class Restaurant extends habitation
+public class Restaurant extends Habitation
 {
     public Restaurant()
     {

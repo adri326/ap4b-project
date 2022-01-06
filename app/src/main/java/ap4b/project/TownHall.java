@@ -1,6 +1,6 @@
 package ap4b.project;
 
-public class TownHall extends habitation
+public class TownHall extends Habitation
 {
     public TownHall()
     {
