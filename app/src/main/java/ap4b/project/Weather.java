@@ -12,6 +12,11 @@ public class Weather {
     /// The factor used for the number of hours for which it was raining in a day
     private float rainFactor = 8.0f;
 
+    /// The speed of the wind of the current day
+    private float windSpeed = 0.0f;
+    /// The maximum speed of wind
+    private float maxWindSpeed = 200.0f;
+
     /// The number of sunny hours in a day
     private final float hoursPerDay;
 
@@ -24,11 +29,12 @@ public class Weather {
         this.hoursPerDay = 12;
     }
 
-    public Weather(float hoursPerDay, float rainFactor, float minIrrigation, float maxIrrigation) {
+    public Weather(float hoursPerDay, float rainFactor, float minIrrigation, float maxIrrigation, float maxWindSpeed) {
         this.hoursPerDay = hoursPerDay;
         this.rainFactor = rainFactor;
         this.minIrrigation = minIrrigation;
         this.maxIrrigation = maxIrrigation;
+        this.maxWindSpeed = maxWindSpeed;
 
         System.out.println("Initialement, la durée totale de la journée avec le soleil est fixée à " + this.hoursPerDay + " heures");
         System.out.println("Et le facteur qui influencent le temps de la pluie est " + this.rainFactor);
@@ -60,15 +66,26 @@ public class Weather {
         return res;
     }
 
+    public float getWindFactor() {
+        return this.windSpeed;
+    }
+
     public void updateWeather() {
         // this.hoursPerDay = dt;
         // System.out.println("Après ce changement, les heures de lumière du jour sont " + this.hoursPerDay + " heures");
         Random rd = new Random();
-        if (rd.nextBoolean()) {
+
+        if (rd.nextBoolean()) { // if it rains today
             this.rainyHours = rd.nextFloat() * rainFactor;
             System.out.println("Le temps de pluie aujourd'hui est " + this.rainyHours + " heures");
         } else {
             this.rainyHours = 0;
+        }
+
+        if (rd.nextBoolean()) { // if it is windy today
+            this.windSpeed = rd.nextFloat() * windMaxSpeed;
+        } else {
+            this.windSpeed = 0.0f;
         }
     }
     /*
@@ -97,6 +114,8 @@ public class Weather {
         res.append(this.getSunFactor());
         res.append("h of sun, irrigation: ");
         res.append(this.getIrrigationFactor() * 100.0f);
+        res.append("%, wind: ");
+        res.append(this.getWindFactor() * 100.0f);
         res.append("%)");
         return res.toString();
     }
