@@ -17,7 +17,7 @@ public class CoalMine extends ResourceGenerator{
         if(rawQuantity>0) {
             this.quantity += 20.0f;
             --this.rawQuantity;
-            this.storage
+             this.storage.setStored(ResourceType.COAL, (int) quantity);
         }
         else
             System.out.println("La resource premiere est epuise, pensez à changer de ressource!! ");
