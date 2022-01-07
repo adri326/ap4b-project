@@ -20,22 +20,13 @@ public class BiomassGenerator extends PowerGenerator{
     }
 
     public void produce(Weather whe){
-        while (true) {
-            try {
-                Thread.sleep(speed*1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            if(woodF.quantity>0) {
-                float temp = storage.getStored(ResourceType.WOOD) + 50.0f;
-                this.storage.setStored(ResourceType.WOOD, (int) temp);
-                this.pollution += 0.001;
-                woodF.quantity-=30;
-            }
-            else
-                System.out.println("Impossible de produre, la quantite du bois est insuffisante! ");
-
-        }
+          if(woodF.quantity>0) {
+              float temp = storage.getStored(ResourceType.WOOD) + 50.0f;
+              this.storage.setStored(ResourceType.WOOD, (int) temp);
+              this.pollution += 0.001;
+              woodF.quantity-=30;
+          }
+          else
+              System.out.println("Impossible de produre, la quantite du bois est insuffisante! ");
     }
 }
