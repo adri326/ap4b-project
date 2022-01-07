@@ -18,7 +18,7 @@ public class TechTree
 		unlocked.put(tech,value);
 	}
 	
-	public Technology[] unlockables(GameState state)
+	public Technology[] getUnlockables(GameState state)
 	{
 		List<Technology> techunlockable = new ArrayList<Technology>();
 		int i;
