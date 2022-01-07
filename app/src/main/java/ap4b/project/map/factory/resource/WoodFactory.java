@@ -1,11 +1,12 @@
 package ap4b.project;
 
 public class WoodFactory extends ResourceGenerator{
-    public WoodFactory(){
-        this.quantity = 500.0f;
-        this.speed = 5;
+    public WoodFactory(Tile tile) {
+        this(tile, 500.0f);
     }
-    public WoodFactory(float q){
+
+    public WoodFactory(Tile tile, float q) {
+        super(tile);
         this.quantity = q;
         this.speed = 5;
     }
@@ -17,7 +18,7 @@ public class WoodFactory extends ResourceGenerator{
         else
             System.out.println("La resource premiere est epuise, pensez à changer de resource!! ");
     }
-    
+
     public boolean hasRequiredResources(){return false;}
 
 }

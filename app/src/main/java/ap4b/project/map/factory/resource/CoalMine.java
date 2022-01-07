@@ -1,16 +1,18 @@
 package ap4b.project;
 
 public class CoalMine extends ResourceGenerator{
+    // TODO: make use of Tile::storage
+    public CoalMine(Tile tile) {
+        this(tile, 1000.0f);
+    }
 
-    public CoalMine(){
-        this.quantity = 1000.0f;
+    public CoalMine(Tile tile, float q){
+        super(tile);
+        this.quantity = q;
         this.rawQuantity = 10000000;
         this.speed = 6;
     }
-    public CoalMine(float q){
-        this.quantity = q;
-        this.speed = 6;
-    }
+
     public void generateResource() {
         if(rawQuantity>0) {
             this.quantity += 20.0f;
@@ -21,4 +23,12 @@ public class CoalMine extends ResourceGenerator{
     }
 
     public boolean hasRequiredResources(){return false;}
+
+    public String getTexture() {
+        return "mine-coal";
+    }
+
+    public String getBackgroundTexture() {
+        return this.terrainType.getTexture();
+    }
 }

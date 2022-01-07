@@ -45,6 +45,9 @@ public class Textures {
         this.images.put("school", new Image("/school.png"));
         this.images.put("simplehousing", new Image("/simplehousing.png"));
         this.images.put("townhall", new Image("/townhall.png"));
+        this.images.put("mine-coal", new Image("/mine-coal.png"));
+        this.images.put("mine-thorium", new Image("/mine-thorium.png"));
+        this.images.put("mine-uranium", new Image("/mine-uranium.png"));
     }
 
     public static Textures getInstance() {

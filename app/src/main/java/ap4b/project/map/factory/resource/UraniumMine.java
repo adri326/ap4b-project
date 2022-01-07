@@ -1,15 +1,18 @@
 package ap4b.project;
 
 public class UraniumMine extends ResourceGenerator{
-    public UraniumMine(){
-        this.quantity = 1000.0f;
+    // TODO: make use of Tile::storage
+    public UraniumMine(Tile tile) {
+        this(tile, 1000.0f);
+    }
+
+    public UraniumMine(Tile tile, float q){
+        super(tile);
+        this.quantity = q;
         this.rawQuantity = 10000000;
         this.speed = 6;
     }
-    public UraniumMine(float q){
-        this.quantity = q;
-        this.speed = 6;
-    }
+
     public void generateResource() {
         if (rawQuantity>0) {
             this.quantity += 200.0f;
@@ -18,6 +21,14 @@ public class UraniumMine extends ResourceGenerator{
         else
             System.out.println("La resource premiere est epuise, pensez à changer de resource!! ");
     }
-    
+
     public boolean hasRequiredResources(){return false;}
+
+    public String getTexture() {
+        return "mine-uranium";
+    }
+
+    public String getBackgroundTexture() {
+        return this.terrainType.getTexture();
+    }
 }

@@ -55,6 +55,10 @@ public class Map {
         this.tiles[4][3] = new Restaurant(this.tiles[4][3]);
         this.tiles[3][4] = new SimpleHousing(this.tiles[3][4]);
         this.tiles[3][5] = new School(this.tiles[3][5]);
+
+        this.tiles[10][10] = new CoalMine(this.tiles[10][10]);
+        this.tiles[11][10] = new ThoriumMine(this.tiles[11][10]);
+        this.tiles[12][10] = new UraniumMine(this.tiles[12][10]);
     }
 
     private boolean inBounds(int x, int y) {
