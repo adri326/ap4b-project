@@ -10,6 +10,7 @@ public class Simulation {
     public int difficulty;
     private float totalSatisfaction = 0.0f;
    private int population =0;
+
     public Simulation(int difficulty) {
         this.difficulty = difficulty;
     }
@@ -78,12 +79,13 @@ si elle n'est pas vide, vous ne pouvez pas...*/
     /*Mon intention initiale était que l'utilisateur puisse sélectionner l'habitation
     qu'il voulait mettre en place via un bouton, ici pour le lier à l'image*/
     private void placeHabitation(GameState state) {
+
         for (int i = 1;i<=10;i++) {
             Random rd1 = new Random();
             int x=rd1.nextInt(state.map.width+1);
             Random rd2 = new Random();
             int y=rd2.nextInt(state.map.height+1);
-            if ( canPlaceHabitation(state, x, y) && state.tile[x][y].terrainType = ap4b.project.TerrainType.PLAINS){
+            if ( canPlaceHabitation(state, x, y) && state.map.tiles[y][x].terrainType == ap4b.project.TerrainType.PLAINS){
                 JFrame f = new JFrame("Quel bâtiment voulez-vous mettre en");
 
                 JButton SimpleHousingButton = new JButton("SimpleHousing");
