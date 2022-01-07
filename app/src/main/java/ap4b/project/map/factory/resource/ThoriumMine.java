@@ -11,19 +11,13 @@ public class ThoriumMine extends ResourceGenerator{
         this.speed = 8;
     }
     public void generateResource() {
-        while (rawQuantity>0) {
-
-            try {
-                Thread.sleep(speed * 1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        if (rawQuantity>0) {
             this.quantity += 200.0f;
             --this.rawQuantity;
         }
-        if(rawQuantity<=0){
+        else
             System.out.println("La ressource premiere est epuise, pensez à changer de ressource!! ");
-        }
     }
+    
     public boolean hasRequiredResources(){return false;}
 }
