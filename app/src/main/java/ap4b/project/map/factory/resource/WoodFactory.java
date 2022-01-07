@@ -14,6 +14,7 @@ public class WoodFactory extends ResourceGenerator{
       if (rawQuantity>0) {
           this.quantity += 100.0f;
           this.rawQuantity-=10;
+          this.storage.setStored(ResourceType.WOOD, (int) this.quantity);
         }
         else
             System.out.println("La resource premiere est epuise, pensez à changer de resource!! ");
