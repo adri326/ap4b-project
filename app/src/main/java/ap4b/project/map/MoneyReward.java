@@ -3,14 +3,14 @@ package ap4b.project;
 public class MoneyReward implements Distributable {
     private int amount;
 
-    public ResourceReward(){
+    public MoneyReward(){
         this.amount = 0;
     }
-    public ResourceReward(int amount){
+    public MoneyReward(int amount){
         this.amount = amount;
     }
 
     public void distribute(Gamestate state) {
-        gamestate.money += this.amount;
+        gamestate.bank.updateMoney(this.amount);
     }
 }
