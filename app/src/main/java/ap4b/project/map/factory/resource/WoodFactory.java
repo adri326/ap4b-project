@@ -10,20 +10,14 @@ public class WoodFactory extends ResourceGenerator{
         this.speed = 5;
     }
     public void generateResource() {
-        while (rawQuantity>0) {
-
-            try {
-                Thread.sleep(speed * 1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            this.quantity += 100.0f;
-            this.rawQuantity-=10;
+      if (rawQuantity>0) {
+          this.quantity += 100.0f;
+          this.rawQuantity-=10;
         }
-        if(rawQuantity<=0){
+        else
             System.out.println("La ressource premiere est epuise, pensez à changer de ressource!! ");
-        }
     }
+    
     public boolean hasRequiredResources(){return false;}
 
 }
