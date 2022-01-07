@@ -17,7 +17,7 @@ public class ThoriumMine extends ResourceGenerator{
         if (rawQuantity>0) {
             this.quantity += 200.0f;
             --this.rawQuantity;
-            this.storage.setStored(ResourceType.COAL, (int) this.quantity);
+            this.storage.setStored(ResourceType.THORIUM, (int) this.quantity);
         }
         else
             System.out.println("La resource premiere est epuise, pensez à changer de resource!! ");
