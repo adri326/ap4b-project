@@ -17,7 +17,8 @@ public class CoalMine extends ResourceGenerator{
             --this.rawQuantity;
         }
         else
-            System.out.println("La ressource premiere est epuise, pensez à changer de ressource!! ");
-    
-        public boolean hasRequiredResources(){return false;}
+            System.out.println("La resource premiere est epuise, pensez à changer de resource!! ");
+    }
+
+    public boolean hasRequiredResources(){return false;}
 }

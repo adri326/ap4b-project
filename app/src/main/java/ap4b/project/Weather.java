@@ -83,7 +83,7 @@ public class Weather {
         }
 
         if (rd.nextBoolean()) { // if it is windy today
-            this.windSpeed = rd.nextFloat() * windMaxSpeed;
+            this.windSpeed = rd.nextFloat() * maxWindSpeed;
         } else {
             this.windSpeed = 0.0f;
         }

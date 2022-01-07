@@ -10,7 +10,7 @@ public class MoneyReward implements Distributable {
         this.amount = amount;
     }
 
-    public void distribute(Gamestate state) {
-        gamestate.bank.updateMoney(this.amount);
+    public void distribute(GameState state) {
+        state.bank.updateMoney(this.amount);
     }
 }

@@ -13,7 +13,8 @@ public class ResourceReward implements Distributable{
         this.resource = resource;
     }
 
-    public void distribute(Gamestate gamestate) {
-        gamestate.totalResources += this.amount;
+    public void distribute(GameState gamestate) {
+        // TODO: fix
+        // gamestate.totalResources += this.amount;
     }
 }

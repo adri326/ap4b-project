@@ -13,13 +13,15 @@ public class ResourceReq extends Requirement
 
     public boolean fulfilled(GameState state)
     {
-        if (state.totalResources(resource)>=amount)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return false;
+        // TODO: fix the below lines
+        // if (state.totalResources(resource)>=amount)
+        // {
+        //     return true;
+        // }
+        // else
+        // {
+        //     return false;
+        // }
     }
 }

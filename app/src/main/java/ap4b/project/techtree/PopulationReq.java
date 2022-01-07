@@ -5,21 +5,23 @@ package ap4b.project;
 public class PopulationReq extends Requirement
 {
     private int amount;
-    
+
     public void PopulationReq(int minimumAmount)
     {
         amount=minimumAmount;
     }
-    
+
     public boolean fulfilled(GameState state)
     {
-        if (state.population>=amount)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }    
+        return false;
+        // TODO: fix the following and remove the previous line
+        // if (state.population>=amount)
+        // {
+        //     return true;
+        // }
+        // else
+        // {
+        //     return false;
+        // }
+    }
 }

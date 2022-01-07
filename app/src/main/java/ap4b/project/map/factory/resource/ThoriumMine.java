@@ -16,7 +16,7 @@ public class ThoriumMine extends ResourceGenerator{
             --this.rawQuantity;
         }
         else
-            System.out.println("La ressource premiere est epuise, pensez à changer de ressource!! ");
+            System.out.println("La resource premiere est epuise, pensez à changer de resource!! ");
     }
     
     public boolean hasRequiredResources(){return false;}

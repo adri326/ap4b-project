@@ -2,22 +2,22 @@ package ap4b.project;
 import java.util.HashMap; // import the HashMap class
 import java.util.*;
 
-public class TechTree 
+public class TechTree
 {
     private HashMap<String, Boolean> unlocked = new HashMap<String, Boolean>();
     private Technology technologies[];
-    
+
     public boolean hasUnlocked(String tech)
     {
         return unlocked.get(tech);
     }
-    
+
     public void setUnlocked(String tech, boolean value)
     {
         unlocked.remove(tech);
         unlocked.put(tech,value);
     }
-    
+
     public Technology[] getUnlockables(GameState state)
     {
         List<Technology> techunlockable = new ArrayList<Technology>();
@@ -29,5 +29,6 @@ public class TechTree
                 techunlockable.add(technologies[i]);
             }
         }
+        return (Technology[])techunlockable.toArray();
     }
 }

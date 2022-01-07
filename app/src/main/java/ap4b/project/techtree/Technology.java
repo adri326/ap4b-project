@@ -27,7 +27,7 @@ public class Technology {
     public void setMoneyReward(MoneyReward[] moneyReward){this.moneyReward = moneyReward;}
     public void setName(String name){this.name = name;}
 
-    public boolean canUnlock(Gamestate state){
+    public boolean canUnlock(GameState state){
         if(moneyReq.fulfilled(state) & resourceReq.fulfilled(state) & previousTechReq.fulfilled(state) & populationReq.fulfilled(state)) {
             return true;
         }
