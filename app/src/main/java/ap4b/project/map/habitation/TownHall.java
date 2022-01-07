@@ -16,4 +16,7 @@ public class TownHall extends Habitation
     public void reducePopulation() {
         population-=40;
     }
+    public String getTexture() {
+        return "townhall";
+    }
 }

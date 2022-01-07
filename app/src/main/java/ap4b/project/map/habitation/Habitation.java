@@ -59,4 +59,7 @@ public class Habitation extends Tile
             this.updateSatisfaction();
         // }
     }
+    public String getTexture() {
+        return "";
+    }
 }
