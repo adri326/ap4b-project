@@ -333,10 +333,18 @@ public class MainScene extends Scene {
         PlaceBuilding placeCoalMine = new PlaceBuilding(this, (tile) -> new CoalMine(tile), "Coal Mine", 100);
         PlaceBuilding placeUraniumMine = new PlaceBuilding(this, (tile) -> new UraniumMine(tile), "Uranium Mine", 1000);
         PlaceBuilding placeThoriumMine = new PlaceBuilding(this, (tile) -> new ThoriumMine(tile), "Thorium Mine", 1250);
+        PlaceBuilding placeHospital = new PlaceBuilding(this, (tile) -> new Hospital(tile), "Hospital", 0);
+        PlaceBuilding placeRestaurant = new PlaceBuilding(this, (tile) -> new Restaurant(tile), "Restaurant", 0);
+        PlaceBuilding placeSimpleHousing = new PlaceBuilding(this, (tile) -> new SimpleHousing(tile), "Simple Housing", 0);
+        PlaceBuilding placeSchool = new PlaceBuilding(this, (tile) -> new School(tile), "School", 0);
         menuPane.getChildren().addAll(
             placeCoalMine,
             placeUraniumMine,
-            placeThoriumMine
+            placeThoriumMine,
+            placeHospital,
+            placeRestaurant,
+            placeSimpleHousing,
+            placeSchool
         );
         menuPane.setRowIndex(placeCoalMine, 0);
         menuPane.setColumnIndex(placeCoalMine, 0);
@@ -346,6 +354,18 @@ public class MainScene extends Scene {
 
         menuPane.setRowIndex(placeThoriumMine, 0);
         menuPane.setColumnIndex(placeThoriumMine, 2);
+
+        menuPane.setRowIndex(placeHospital, 0);
+        menuPane.setColumnIndex(placeHospital, 3);
+
+        menuPane.setRowIndex(placeRestaurant, 0);
+        menuPane.setColumnIndex(placeRestaurant, 4);
+
+        menuPane.setRowIndex(placeSimpleHousing, 0);
+        menuPane.setColumnIndex(placeSimpleHousing, 5);
+
+        menuPane.setRowIndex(placeSchool, 0);
+        menuPane.setColumnIndex(placeSchool, 6);
 
         this.rootPane.getChildren().addAll(menuPane);
 
