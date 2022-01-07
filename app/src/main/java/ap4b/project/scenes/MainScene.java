@@ -15,8 +15,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class MainScene extends Scene {
+    public static final int MENU_HEIGHT = 32;
+
+    public ClickListener clickListener = null;
+
     private Canvas canvas;
-    public final StackPane rootPane;
+    public final VBox rootPane;
     public App parentApp;
     private GraphicsContext ctx;
     private double width;
@@ -38,6 +42,24 @@ public class MainScene extends Scene {
 
         res[1] = (y - 0.5 - (double)this.gameState.map.height / 2.0) * tileSize * zoomFactor;
         res[1] += this.cy + this.height / 2.0;
+
+        return res;
+    }
+
+    private int[] fromVisualPosition(double x, double y) {
+        int res[] = new int[2];
+
+        double x2 = x;
+        x2 -= this.cx + this.width / 2.0;
+        x2 /= tileSize * zoomFactor;
+        x2 += 0.5 + (double)this.gameState.map.width / 2.0;
+        res[0] = (int)x2;
+
+        double y2 = y;
+        y2 -= this.cy + this.height / 2.0;
+        y2 /= tileSize * zoomFactor;
+        y2 += 0.5 + (double)this.gameState.map.height / 2.0;
+        res[1] = (int)y2;
 
         return res;
     }
@@ -192,7 +214,7 @@ public class MainScene extends Scene {
         this.height = height;
 
         this.canvas.setWidth(width);
-        this.canvas.setHeight(height);
+        this.canvas.setHeight(height - MENU_HEIGHT);
 
         this.draw();
     }
@@ -201,25 +223,35 @@ public class MainScene extends Scene {
     private boolean mouseDown = false;
 
     private void onMouseDown(MouseEvent event) {
-        this.mouseX = event.getScreenX();
-        this.mouseY = event.getScreenY();
+        this.mouseX = event.getX();
+        this.mouseY = event.getY();
         this.mouseDown = true;
+
+        if (this.clickListener != null) {
+            int pos[] = this.fromVisualPosition(this.mouseX, this.mouseY);
+            if (
+                pos[0] >= 0 && pos[0] < this.gameState.map.width
+                && pos[1] >= 0 && pos[1] < this.gameState.map.height
+            ) {
+                this.clickListener.onClick(pos[0], pos[1]);
+            }
+        }
     }
 
     private void onMouseUp(MouseEvent event) {
-        this.mouseX = event.getScreenX();
-        this.mouseY = event.getScreenY();
+        this.mouseX = event.getX();
+        this.mouseY = event.getY();
         this.mouseDown = false;
     }
 
     private void onMouseMoved(MouseEvent event) {
         if (this.mouseDown) {
-            this.cx += event.getScreenX() - this.mouseX;
-            this.cy += event.getScreenY() - this.mouseY;
+            this.cx += event.getX() - this.mouseX;
+            this.cy += event.getY() - this.mouseY;
             this.draw();
         }
-        this.mouseX = event.getScreenX();
-        this.mouseY = event.getScreenY();
+        this.mouseX = event.getX();
+        this.mouseY = event.getY();
     }
 
     private float zoomPowerFactor = 2.0f;
@@ -260,17 +292,22 @@ public class MainScene extends Scene {
         }
     }
 
+    public void scheduleDraw() {
+        this.draw();
+    }
+
     MainScene(App parentApp, double width, double height) {
-        super(new StackPane(), width, height);
-        this.rootPane = (StackPane)this.getRoot();
+        super(new VBox(), width, height);
+        this.rootPane = (VBox)this.getRoot();
 
         this.parentApp = parentApp;
         this.width = width;
         this.height = height;
 
-        this.canvas = new Canvas((int)width, (int)height);
+        this.canvas = new Canvas((int)width, (int)height - MENU_HEIGHT);
+        this.rootPane.setVgrow(this.canvas, Priority.ALWAYS);
         this.rootPane.getChildren().addAll(canvas);
-        this.rootPane.setAlignment(canvas, Pos.TOP_CENTER);
+        // this.rootPane.setAlignment(canvas, Pos.TOP_CENTER);
 
         this.ctx = this.canvas.getGraphicsContext2D();
         // Only available for JavaFX >= 12
@@ -290,6 +327,27 @@ public class MainScene extends Scene {
         this.canvas.setOnMouseReleased(this::onMouseUp);
         this.canvas.setOnMouseExited(this::onMouseUp);
         this.canvas.setOnScroll(this::onScroll);
+
+        // Create a menu to add the different buildings
+        GridPane menuPane = new GridPane();
+        PlaceBuilding placeCoalMine = new PlaceBuilding(this, (tile) -> new CoalMine(tile), "Coal Mine", 100);
+        PlaceBuilding placeUraniumMine = new PlaceBuilding(this, (tile) -> new UraniumMine(tile), "Uranium Mine", 1000);
+        PlaceBuilding placeThoriumMine = new PlaceBuilding(this, (tile) -> new ThoriumMine(tile), "Thorium Mine", 1250);
+        menuPane.getChildren().addAll(
+            placeCoalMine,
+            placeUraniumMine,
+            placeThoriumMine
+        );
+        menuPane.setRowIndex(placeCoalMine, 0);
+        menuPane.setColumnIndex(placeCoalMine, 0);
+
+        menuPane.setRowIndex(placeUraniumMine, 0);
+        menuPane.setColumnIndex(placeUraniumMine, 1);
+
+        menuPane.setRowIndex(placeThoriumMine, 0);
+        menuPane.setColumnIndex(placeThoriumMine, 2);
+
+        this.rootPane.getChildren().addAll(menuPane);
 
         this.draw();
     }
