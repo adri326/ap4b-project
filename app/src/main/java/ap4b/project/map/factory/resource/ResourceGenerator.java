@@ -7,7 +7,6 @@ public abstract class ResourceGenerator extends Factory{
     public abstract void generateResource();
     public float getQuantity(){return this.quantity;}
     public Upgrade getUpgrades(){
-        Upgrade up = new Upgrade();
-        return up;
+        return upgrade;
     }
 }
