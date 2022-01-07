@@ -7,4 +7,8 @@ public abstract class Factory extends Tile {
     public abstract boolean hasRequiredResources();
     public abstract Upgrade getUpgrades();
 
+    @Override
+    public String getBackgroundTexture() {
+        return "concrete";
+    }
 }

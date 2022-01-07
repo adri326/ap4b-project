@@ -39,4 +39,8 @@ public class Tile {
     public String getTexture() {
         return "";
     }
+
+    public String getBackgroundTexture() {
+        return this.terrainType.getTexture();
+    }
 }

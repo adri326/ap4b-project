@@ -7,7 +7,7 @@ import java.util.HashSet;
 // Singleton
 public class Textures {
     private static Textures singleton = new Textures();
-    public static final int MAX_PRIORITY = 4;
+    public static final int MAX_PRIORITY = 5;
 
     public HashMap<String, Image> images = new HashMap();
     public HashSet<String> ctm = new HashSet();
@@ -21,12 +21,14 @@ public class Textures {
         this.images.put("coal", new Image("/coal.png"));
         this.images.put("uranium", new Image("/uranium.png"));
         this.images.put("thorium", new Image("/thorium.png"));
+        this.images.put("concrete", new Image("/concrete.png"));
 
         this.ctm.add("forest");
         this.ctm.add("water");
         this.ctm.add("coal");
         this.ctm.add("uranium");
         this.ctm.add("thorium");
+        this.ctm.add("concrete");
 
         this.ctmPriority.put("grass", 0);
         this.ctmPriority.put("hills", 0);
@@ -35,6 +37,7 @@ public class Textures {
         this.ctmPriority.put("thorium", 1);
         this.ctmPriority.put("water", 2);
         this.ctmPriority.put("forest", 3);
+        this.ctmPriority.put("concrete", 4);
 
 
         this.images.put("hospital", new Image("/hospital.png"));

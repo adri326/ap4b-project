@@ -100,9 +100,9 @@ public class MainScene extends Scene {
         Draws the connected part of a texture at (x, y), iff that texture is a ctm texture and
         the adjacent tiles aren't already occupied by it.
     **/
-    private void drawTileCTM(int x, int y, Map map) {
+    private void drawBackgroundCTM(int x, int y, Map map) {
         // TODO: use a bool[][] map or a lambda?
-        String currentTexture = map.get(x, y).terrainType.getTexture();
+        String currentTexture = map.get(x, y).getBackgroundTexture();
 
         if (!Textures.isCtm(currentTexture)) return;
 
@@ -114,15 +114,15 @@ public class MainScene extends Scene {
 
                 if (!Textures.shouldDrawCtm(
                     currentTexture,
-                    map.get(x + dx, y + dy).terrainType.getTexture()
+                    map.get(x + dx, y + dy).getBackgroundTexture()
                 )) {
                     continue;
                 }
 
                 if (dx != 0 && dy != 0) {
                     if (
-                        !Textures.shouldDrawCtm(currentTexture, map.get(x + dx, y).terrainType.getTexture())
-                        || !Textures.shouldDrawCtm(currentTexture, map.get(x, y + dy).terrainType.getTexture())
+                        !Textures.shouldDrawCtm(currentTexture, map.get(x + dx, y).getBackgroundTexture())
+                        || !Textures.shouldDrawCtm(currentTexture, map.get(x, y + dy).getBackgroundTexture())
                     ) continue;
                 }
 
@@ -155,7 +155,7 @@ public class MainScene extends Scene {
             if (!this.cullY(visualPosition[1], visualPosition[1] + this.tileSize * this.zoomFactor)) continue;
 
             for (int x = 0; x < this.gameState.map.width; x++) {
-                drawTile(x, y, this.gameState.map.get(x, y).terrainType.getTexture());
+                drawTile(x, y, this.gameState.map.get(x, y).getBackgroundTexture());
             }
         }
 
@@ -166,9 +166,9 @@ public class MainScene extends Scene {
                 if (!this.cullY(visualPosition[1], visualPosition[1] + this.tileSize * this.zoomFactor)) continue;
 
                 for (int x = 0; x < this.gameState.map.width; x++) {
-                    Integer p = Textures.getInstance().ctmPriority.get(this.gameState.map.get(x, y).terrainType.getTexture());
+                    Integer p = Textures.getInstance().ctmPriority.get(this.gameState.map.get(x, y).getBackgroundTexture());
                     if (p != null && (int)p == priority) {
-                        drawTileCTM(x, y, this.gameState.map);
+                        drawBackgroundCTM(x, y, this.gameState.map);
                     }
                 }
             }
