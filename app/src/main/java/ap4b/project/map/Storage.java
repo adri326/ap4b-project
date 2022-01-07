@@ -2,29 +2,27 @@ package ap4b.project;
 
 import java.util.HashMap;
 
-public class Storage {
-    private HashMap<ResourceType, Integer> stored = new HashMap();
-    private HashMap<ResourceType, Integer> maxStored = new HashMap();
-
-    public Storage() {
-        // TODO: initialize stored and maxStored to zero
-    }
-
-    public int getStored(ResourceType resource) {
-        // TODO
-        return 0;
-    }
-    public int getMaxStored(ResourceType resource) {
-        // TODO
-        return 0;
-    }
-
-    public int setStored(ResourceType resource, int value) {
-        // TODO
-        return 0;
-    }
-    public int setMaxStored(ResourceType resource, int value) {
-        // TODO
-        return 0;
-    }
+public class Storage 
+{
+	private HashMap<ResourceType, Integer> stored = new HashMap<ResourceType, Integer>();
+	private HashMap<ResourceType, Integer> maxStored = new HashMap<ResourceType, Integer>();
+	
+	public int getStored(ResourceType restype)
+	{
+		return stored.get(restype);
+	}
+	
+	public int getMaxStored(ResourceType restype)
+	{
+		return maxStored.get(restype);
+	}
+	
+	public void setStored(ResourceType restype, int value)
+	{
+		stored.put(restype,value);
+	}
+	public void setMaxStored(ResourceType restype, int value)
+	{
+		maxStored.put(restype,value);
+	}
 }
