@@ -96,6 +96,21 @@ Finally, open the drop-down next to the "Run" button, and choose `ap4b-project -
 Later, it should appear first in the drop-down and pressing the "Run" button will run it directly.
 This will call `gradlew run` and, assuming that you were able to complete the [Compiling the source code](#compiling-the-source-code) section, you should see a window appear with the game running.
 
+### Compiling and running as a .JAR file
+
+Because JavaFX was removed from the JDK, it is now exponentially harder to compile the code as a jar file.
+You will have to somehow download a version of JavaFX yourself. On arch linux, you only need to install `java-openjfx` or `java11-openjfx`.
+
+Then, run `gradle jar` to compile the code as a JAR.
+
+To run the .JAR, you will have to use the following command:
+
+```sh
+java --module-path /usr/lib/jvm/java-11-openjfx/lib --add-modules="javafx.controls" -jar app/build/libs/ap4b.project-1.0.0.jar
+```
+
+Replace the path after `--module-path` with wherever you installed JavaFX (it does need to be the `lib` subdirectory).
+
 ## Editing the UML files
 
 Github unfortunately does not have a "download file" button, so you will need to either [download the entire repository](#grabbing-the-source-code) or use one of the handy links here:
