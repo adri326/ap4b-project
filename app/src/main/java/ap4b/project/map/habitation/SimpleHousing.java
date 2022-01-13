@@ -5,7 +5,7 @@ public class SimpleHousing extends Habitation
     public SimpleHousing(Tile tile) {
         super(tile);
         this.consommationUnity=10;
-        this.taux_satisfaction=1;
+        this.satisfaction=1;
         this.consomationSpeed=1000;
     }
 

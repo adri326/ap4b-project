@@ -5,7 +5,7 @@ public class Hospital extends Habitation
     public Hospital(Tile tile) {
         super(tile);
         this.consommationUnity=50;
-        this.taux_satisfaction=5;
+        this.satisfaction=5;
         this.consomationSpeed=100;
     }
 

@@ -76,14 +76,16 @@ public class Map {
 
     public boolean placeBuilding(int x, int y, Tile building) {
         if (!this.inBounds(x, y)) return false;
-        // TODO
+
+        this.tiles[y][x] = building;
 
         return false;
     }
 
     public boolean destroyBuilding(int x, int y) {
         if (!this.inBounds(x, y)) return false;
-        // TODO
+
+        this.tiles[y][x] = new Tile(this.tiles[y][x]);
 
         return false;
     }

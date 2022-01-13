@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class MainScene extends Scene {
-    public static final int MENU_HEIGHT = 32;
+    public static final int MENU_HEIGHT = 50;
 
     public ClickListener clickListener = null;
 
@@ -366,6 +366,15 @@ public class MainScene extends Scene {
 
         menuPane.setRowIndex(placeSchool, 0);
         menuPane.setColumnIndex(placeSchool, 6);
+
+        Button updateButton = new Button("Update");
+        updateButton.setOnAction((event) -> {
+            this.gameState.update();
+            this.scheduleDraw();
+        });
+        menuPane.getChildren().addAll(updateButton);
+        menuPane.setRowIndex(updateButton, 1);
+        menuPane.setColumnIndex(updateButton, 0);
 
         this.rootPane.getChildren().addAll(menuPane);
 

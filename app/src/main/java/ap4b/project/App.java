@@ -20,7 +20,10 @@ public class App extends Application {
         this.stage = primaryStage;
         this.stage.setTitle("AP4B Project");
 
-        this.setWelcomeScene();
+        this.gameState = new GameState(10, 10, 0);
+        this.setMainScene();
+
+        // this.setWelcomeScene();
         this.stage.show();
     }
 

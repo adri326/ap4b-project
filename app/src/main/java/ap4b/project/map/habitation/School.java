@@ -5,7 +5,7 @@ public class School extends Habitation
     public School(Tile tile) {
         super(tile);
         this.consommationUnity=30;
-        this.taux_satisfaction=3;
+        this.satisfaction=3;
         this.consomationSpeed=500;
     }
 

@@ -7,7 +7,7 @@ public class Habitation extends Tile
     public int nb_aliment = 0;
     public int nb_non_aliment = 0;
     public int consomationSpeed;
-    public int taux_satisfaction;
+    public int satisfaction;
 
     public Habitation(Tile tile)
     {
@@ -21,13 +21,16 @@ public class Habitation extends Tile
 
     public void updateSatisfaction()
     {
+        // TODO: fix this
         if(this.powered)
         {
-            this.satisfaction+=(nb_aliment/(nb_non_aliment+nb_aliment))*population+taux_satisfaction;
+            // this.satisfaction+=(nb_aliment/(nb_non_aliment+nb_aliment))*population+satisfaction;
+            this.satisfaction = this.population;
         }
         else
         {
-            this.satisfaction-=(nb_non_aliment/nb_aliment)*population+taux_satisfaction;
+            // this.satisfaction-=(nb_non_aliment/nb_aliment)*population+satisfaction;
+            this.satisfaction = 0;
         }
     }
 

@@ -5,7 +5,7 @@ public class Restaurant extends Habitation
     public Restaurant(Tile tile) {
         super(tile);
         this.consommationUnity=20;
-        this.taux_satisfaction=2;
+        this.satisfaction=2;
         this.consomationSpeed=700;
     }
 
