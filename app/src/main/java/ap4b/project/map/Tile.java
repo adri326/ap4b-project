@@ -31,9 +31,8 @@ public class Tile {
         return this.pollution;
     }
 
-    public float updateGeneration(Weather weather) {
+    public void updateGeneration(GameState state) {
         // noop
-        return 0.0f;
     }
 
     public String getTexture() {

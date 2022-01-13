@@ -3,35 +3,23 @@ package ap4b.project;
 public class Habitation extends Tile
 {
     public int population = 1;
-    public int consommationUnity;
-    public int nb_aliment = 0;
-    public int nb_non_aliment = 0;
-    public int consomationSpeed;
-    public int satisfaction;
+    public int consumptionFactor;
+    public int lastPowered = 0;
+    public float satisfaction = 0.0f;
 
-    public Habitation(Tile tile)
-    {
+    public Habitation(Tile tile) {
         super(tile);
     }
 
-    public void payElectricity(int quantity, float price, Bank bank)
-    {
+    public void payElectricity(int quantity, float price, Bank bank) {
         bank.updateMoney((int)((float)quantity*price));
     }
 
-    public void updateSatisfaction()
-    {
-        // TODO: fix this
-        if(this.powered)
-        {
-            // this.satisfaction+=(nb_aliment/(nb_non_aliment+nb_aliment))*population+satisfaction;
-            this.satisfaction = this.population;
-        }
-        else
-        {
-            // this.satisfaction-=(nb_non_aliment/nb_aliment)*population+satisfaction;
-            this.satisfaction = 0;
-        }
+    public void updateSatisfaction() {
+        float expectedSatisfaction = (float)this.lastPowered / (float)this.population;
+        expectedSatisfaction *= 2.0f * (1.0f - sigmoid(this.pollution / 10.0f));
+
+        this.satisfaction = (this.satisfaction + expectedSatisfaction) / 2.0f;
     }
 
     public void addPopulation() {
@@ -42,25 +30,18 @@ public class Habitation extends Tile
 
     }
 
-    public void updateGeneration(GameState state) // Usine qui alimente l'Habitation
-    {
-        // while(true)
-        // {
-        //     Thread.sleep(consomationSpeed);
-            int quantity=consommationUnity*population;
-            if(this.storage.getStored(ResourceType.ENERGY)>quantity)
-            {
-                nb_aliment++;
-                this.payElectricity(quantity, state.electricityPrice, state.bank);
-                this.powered=true;
-            }
-            else
-            {
-                this.powered=false;
-                nb_non_aliment++;
-            }
-            this.updateSatisfaction();
-        // }
+    public void updateGeneration(GameState state) {
+        int quantity = consumptionFactor * population;
+        int energyStored = this.storage.getStored(ResourceType.ENERGY);
+        if (energyStored >= quantity) {
+            this.lastPowered = population;
+            this.storage.setStored(ResourceType.ENERGY, energyStored - quantity);
+            this.payElectricity(quantity, state.electricityPrice, state.bank);
+        } else {
+            this.lastPowered = energyStored / consumptionFactor;
+            this.storage.setStored(ResourceType.ENERGY, 0);
+            this.payElectricity(energyStored, state.electricityPrice, state.bank);
+        }
     }
 
     public String getTexture() {
@@ -70,5 +51,10 @@ public class Habitation extends Tile
     @Override
     public String getBackgroundTexture() {
         return "concrete";
+    }
+
+    private float sigmoid(float x) {
+        // tan¯¹(x*π/2)/π+.5
+        return (float)Math.atan(x * Math.PI / 2.0f) / (float)Math.PI + 0.5f;
     }
 }

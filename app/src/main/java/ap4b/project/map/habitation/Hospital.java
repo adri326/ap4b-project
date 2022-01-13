@@ -4,9 +4,9 @@ public class Hospital extends Habitation
 {
     public Hospital(Tile tile) {
         super(tile);
-        this.consommationUnity=50;
+        this.consumptionFactor=50;
         this.satisfaction=5;
-        this.consomationSpeed=100;
+        this.consumptionFactor=100;
     }
 
     public void addPopulation() {

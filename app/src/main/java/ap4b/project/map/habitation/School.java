@@ -4,9 +4,9 @@ public class School extends Habitation
 {
     public School(Tile tile) {
         super(tile);
-        this.consommationUnity=30;
+        this.consumptionFactor=30;
         this.satisfaction=3;
-        this.consomationSpeed=500;
+        this.consumptionFactor=500;
     }
 
     public void addPopulation() {

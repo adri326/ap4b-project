@@ -4,9 +4,9 @@ public class Restaurant extends Habitation
 {
     public Restaurant(Tile tile) {
         super(tile);
-        this.consommationUnity=20;
+        this.consumptionFactor=20;
         this.satisfaction=2;
-        this.consomationSpeed=700;
+        this.consumptionFactor=700;
     }
 
     public void addPopulation() {

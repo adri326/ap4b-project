@@ -4,9 +4,9 @@ public class TownHall extends Habitation
 {
     public TownHall(Tile tile) {
         super(tile);
-        this.consommationUnity=40;
+        this.consumptionFactor=40;
         this.satisfaction=4;
-        this.consomationSpeed=300;
+        this.consumptionFactor=300;
     }
 
     public void addPopulation() {
