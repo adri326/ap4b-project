@@ -45,9 +45,19 @@ public class Textures {
         this.images.put("school", new Image("/school.png"));
         this.images.put("simplehousing", new Image("/simplehousing.png"));
         this.images.put("townhall", new Image("/townhall.png"));
+
         this.images.put("mine-coal", new Image("/mine-coal.png"));
         this.images.put("mine-thorium", new Image("/mine-thorium.png"));
         this.images.put("mine-uranium", new Image("/mine-uranium.png"));
+        this.images.put("wood-factory", new Image("/wood-factory.png"));
+
+        this.images.put("biomass-generator", new Image("/BiomassGenerator.png"));
+        this.images.put("coal-generator", new Image("/CoalGenerator.png"));
+        this.images.put("fusion-generator", new Image("/FusionGenerator.png"));
+        this.images.put("hydroelectric-generator", new Image("/HydroelectricGenerator.png"));
+        this.images.put("solar-generator", new Image("/SolarGenerator.png"));
+        this.images.put("uranium-generator", new Image("/UraniumGenerator.png"));
+        this.images.put("wind-generator", new Image("/WindGenerator.png"));
     }
 
     public static Textures getInstance() {

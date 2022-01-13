@@ -22,4 +22,14 @@ public class WoodFactory extends ResourceGenerator{
 
     public boolean hasRequiredResources(){return false;}
 
+
+    @Override
+    public String getTexture() {
+        return "wood-factory";
+    }
+
+    @Override
+    public String getBackgroundTexture() {
+        return this.terrainType.getTexture();
+    }
 }

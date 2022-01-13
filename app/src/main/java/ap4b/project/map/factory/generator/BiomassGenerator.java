@@ -3,15 +3,10 @@ package ap4b.project;
 public class BiomassGenerator extends PowerGenerator{
     private WoodFactory woodF;
 
-    public BiomassGenerator(){
-        super();
+    public BiomassGenerator(Tile tile) {
+        super(tile);
         this.speed = 4;
     }
-    public BiomassGenerator(Upgrade i){
-        this.speed = 4;
-        this.installedUpgrades = i;
-    }
-
 
     public boolean hasRequiredResources(){return true;}
     public Upgrade getUpgrades(){
@@ -19,7 +14,7 @@ public class BiomassGenerator extends PowerGenerator{
         return up;
     }
 
-    public void produce(Weather whe){
+    public void produce(Weather weather){
           if(woodF.quantity>0) {
               float temp = storage.getStored(ResourceType.WOOD) + 50.0f;
               this.storage.setStored(ResourceType.WOOD, (int) temp);
@@ -28,5 +23,10 @@ public class BiomassGenerator extends PowerGenerator{
           }
           else
               System.out.println("Impossible de produre, la quantite du bois est insuffisante! ");
+    }
+
+    @Override
+    public String getTexture() {
+        return "biomass-generator";
     }
 }
