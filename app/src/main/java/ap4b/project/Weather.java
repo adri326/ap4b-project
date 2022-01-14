@@ -113,7 +113,7 @@ public class Weather {
         res.append(" (");
         res.append(this.getSunFactor());
         res.append("h of sun, irrigation: ");
-        res.append(this.getIrrigationFactor() * 100.0f);
+        res.append(this.getIrrigationFactor() * 1.0f);
         res.append("%, wind: ");
         res.append(this.getWindFactor() * 100.0f);
         res.append("%)");

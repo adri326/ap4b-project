@@ -4,6 +4,7 @@ public class ThoriumMine extends ResourceGenerator{
     // TODO: make use of Tile::storage
     public ThoriumMine(Tile tile) {
         this(tile, 500.0f);
+        this.storage.setMaxStored(ResourceType.THORIUM, 1000);
     }
 
     public ThoriumMine(Tile tile, float q){
@@ -13,7 +14,7 @@ public class ThoriumMine extends ResourceGenerator{
         this.speed = 6;
     }
 
-    public void generateResource() {
+    public void updateGeneration(GameState state) {
         if (rawQuantity>0) {
             this.quantity += 200.0f;
             --this.rawQuantity;

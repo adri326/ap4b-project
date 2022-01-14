@@ -129,4 +129,13 @@ public class Bank {
         bank.systemeloan(300);
         bank.situationfiance();
     }*/
+
+    @Override
+    public String toString() {
+        String res = this.money + "€";
+        if (this.hasLoan()) {
+            res += " (has loan: " + this.loanmoney + "€)";
+        }
+        return res;
+    }
 }

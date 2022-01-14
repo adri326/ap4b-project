@@ -113,8 +113,29 @@ la richesse économique et les niveaux de pollution influencent tous la satisfac
     // TODO: updatePollution methods
 
     public void updateGeneration(GameState state) {
+        // ResourceGenerator step
+        for (int y = 0; y < state.map.height; y++) {
+            for (int x = 0; x < state.map.width; x++) {
+                if (state.map.get(x, y) instanceof ResourceGenerator) {
+                    state.map.get(x, y).updateGeneration(state);
+                    state.map.get(x, y).storage.transferAll(state.globalStorage);
+                }
+            }
+        }
 
-        // TODO
+        // PowerGenerator step
+        for (int y = 0; y < state.map.height; y++) {
+            for (int x = 0; x < state.map.width; x++) {
+                if (state.map.get(x, y) instanceof PowerGenerator) {
+                    for (ResourceType type : ResourceType.values()) {
+                        if (type == ResourceType.ENERGY) continue;
+                        state.globalStorage.transfer(type, state.map.get(x, y).storage);
+                    }
+                    state.map.get(x, y).updateGeneration(state);
+                    state.map.get(x, y).storage.transfer(ResourceType.ENERGY, state.globalStorage);
+                }
+            }
+        }
     }
 
     // TODO: updateGeneration methods

@@ -1,23 +1,24 @@
 package ap4b.project;
 
 public class CoalGenerator extends PowerGenerator{
-    private CoalMine coalM;
-
     public CoalGenerator(Tile tile){
         super(tile);
         this.speed = 5;
+        this.storage.setMaxStored(ResourceType.COAL, 200);
+        this.storage.setMaxStored(ResourceType.ENERGY, 400);
     }
 
-    public boolean hasRequiredResources(){return true;}
-    public void produce(Weather weather){
-          if(coalM.quantity>0) {
-              float temp = storage.getStored(ResourceType.COAL) + 1.0f;
-              this.storage.setStored(ResourceType.COAL, (int) temp);
-              this.pollution += 0.001;
-              coalM.quantity-=10;
-          }
-          else
-              System.out.println("Impossible de produre, la quantite du charbon est insuffisante! ");
+    public boolean hasRequiredResources(){
+        return this.storage.getStored(ResourceType.COAL) > 0;
+    }
+
+    public void updateGeneration(GameState state){
+        int stored = this.storage.getStored(ResourceType.COAL);
+        if (stored >= 10) {
+            this.storage.setStored(ResourceType.COAL, stored - 10);
+            this.pollution += 0.4f;
+            this.storage.setStored(ResourceType.ENERGY, this.storage.getStored(ResourceType.ENERGY) + 160);
+        }
     }
 
     @Override

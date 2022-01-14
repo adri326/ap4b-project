@@ -4,12 +4,13 @@ public class SolarGenerator extends PowerGenerator {
     public SolarGenerator(Tile tile){
         super(tile);
         this.speed = 3;
+        this.storage.setMaxStored(ResourceType.ENERGY, 1000);
     }
 
     public boolean hasRequiredResources(){return false;}
 
-    public void produce(Weather weather){
-        float temp = storage.getStored(ResourceType.ENERGY) + 0.1f * weather.getSunFactor();
+    public void updateGeneration(GameState state){
+        float temp = storage.getStored(ResourceType.ENERGY) + 0.1f * state.weather.getSunFactor();
         this.storage.setStored(ResourceType.ENERGY, (int) temp);
         this.pollution += 0.000001;
     }

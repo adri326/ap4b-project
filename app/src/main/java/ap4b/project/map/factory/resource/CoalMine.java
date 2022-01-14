@@ -4,6 +4,7 @@ public class CoalMine extends ResourceGenerator{
     // TODO: make use of Tile::storage
     public CoalMine(Tile tile) {
         this(tile, 1000.0f);
+        this.storage.setMaxStored(ResourceType.COAL, 1000);
     }
 
     public CoalMine(Tile tile, float q){
@@ -13,7 +14,7 @@ public class CoalMine extends ResourceGenerator{
         this.speed = 6;
     }
 
-    public void generateResource() {
+    public void updateGeneration(GameState state) {
         if(rawQuantity>0) {
             this.quantity += 20.0f;
             --this.rawQuantity;

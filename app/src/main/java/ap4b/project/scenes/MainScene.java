@@ -15,11 +15,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class MainScene extends Scene {
-    public static final int MENU_HEIGHT = 50;
+    public static final int MENU_HEIGHT = 75;
 
     public ClickListener clickListener = null;
 
     private Canvas canvas;
+    private Text status;
     public final VBox rootPane;
     public App parentApp;
     private GraphicsContext ctx;
@@ -168,6 +169,8 @@ public class MainScene extends Scene {
     }
 
     private void draw() {
+        this.status.setText(this.gameState.globalStorage.toString() + " " + this.gameState.weather.toString());
+
         ctx.clearRect(0, 0, this.width, this.height);
         ctx.setFill(Color.BLUE);
 
@@ -346,15 +349,15 @@ public class MainScene extends Scene {
         PlaceBuilding placers[] = {
             placeCoalMine,
             placeUraniumMine,
-            placeThoriumMine,
+            // placeThoriumMine,
             placeWoodFactory,
             placeBiomassGenerator,
-            placeCoalGenerator,
-            placeFusionGenerator,
-            placeHydroelectricGenerator,
             placeSolarGenerator,
+            placeCoalGenerator,
             placeUraniumGenerator,
-            placeWindGenerator
+            placeHydroelectricGenerator,
+            placeWindGenerator,
+            placeFusionGenerator
         };
 
         menuPane.getChildren().addAll(placers);
@@ -370,10 +373,17 @@ public class MainScene extends Scene {
             this.scheduleDraw();
         });
         menuPane.getChildren().addAll(updateButton);
-        menuPane.setRowIndex(updateButton, 1);
+        menuPane.setRowIndex(updateButton, 2);
         menuPane.setColumnIndex(updateButton, 0);
 
         this.rootPane.getChildren().addAll(menuPane);
+
+        this.status = new Text("Hello world");
+        menuPane.getChildren().addAll(this.status);
+
+        menuPane.setRowIndex(this.status, 2);
+        menuPane.setColumnIndex(this.status, 1);
+        menuPane.setColumnSpan(this.status, 4);
 
         this.draw();
     }

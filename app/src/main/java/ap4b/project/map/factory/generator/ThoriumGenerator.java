@@ -7,7 +7,7 @@ public class ThoriumGenerator extends PowerGenerator {
     }
 
     public boolean hasRequiredResources(){return true;}
-    public void produce(Weather weather){
+    public void updateGeneration(GameState state){
         // TODO: fix this
     //    if(thoM.quantity>0) {
     //       float temp = storage.getStored(ResourceType.THORIUM) + 200.0f;

@@ -6,23 +6,21 @@ public class BiomassGenerator extends PowerGenerator{
     public BiomassGenerator(Tile tile) {
         super(tile);
         this.speed = 4;
+        this.storage.setMaxStored(ResourceType.WOOD, 200);
+        this.storage.setMaxStored(ResourceType.ENERGY, 400);
     }
 
-    public boolean hasRequiredResources(){return true;}
-    public Upgrade getUpgrades(){
-        Upgrade up = new Upgrade();
-        return up;
+    public boolean hasRequiredResources(){
+        return this.storage.getStored(ResourceType.WOOD) > 0;
     }
 
-    public void produce(Weather weather){
-          if(woodF.quantity>0) {
-              float temp = storage.getStored(ResourceType.WOOD) + 50.0f;
-              this.storage.setStored(ResourceType.WOOD, (int) temp);
-              this.pollution += 0.001;
-              woodF.quantity-=30;
-          }
-          else
-              System.out.println("Impossible de produre, la quantite du bois est insuffisante! ");
+    public void updateGeneration(GameState state){
+        int stored = this.storage.getStored(ResourceType.WOOD);
+        if (stored >= 30) {
+            this.storage.setStored(ResourceType.URANIUM, stored - 30);
+            this.pollution += 0.009f;
+            this.storage.setStored(ResourceType.ENERGY, this.storage.getStored(ResourceType.ENERGY) + 50);
+        }
     }
 
     @Override

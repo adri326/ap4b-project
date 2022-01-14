@@ -8,7 +8,7 @@ public abstract class ResourceGenerator extends Factory{
     protected float quantity;
     protected long rawQuantity; //Contient la quantite maximal de la resource qui peut etre extrait
 
-    public abstract void generateResource();
+    public abstract void updateGeneration(GameState state);
     public float getQuantity(){return this.quantity;}
     public Upgrade getUpgrades(){
         // return upgrade;
